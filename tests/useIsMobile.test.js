@@ -1,10 +1,13 @@
 import { ResponsiveProvider, useIsMobile } from '../src';
+import { breakpoints, breakpointsMax } from './__fixtures__/mockBreakpoints';
 import { cleanup, render } from '@testing-library/react';
 import {
     mockMatchMedia,
     unmockMatchMedia,
 } from './__fixtures__/mockMatchMedia';
 import React from 'react';
+
+const mockProps = { breakpoints, breakpointsMax };
 
 const MockComponent = ({ children }) => {
     const responsive = useIsMobile();
@@ -29,7 +32,7 @@ describe('useResponsive()', () => {
         window.resizeTo(1024, 768);
 
         render(
-            <ResponsiveProvider>
+            <ResponsiveProvider {...mockProps}>
                 <MockComponent>{mockRenderProp}</MockComponent>
             </ResponsiveProvider>
         );
@@ -45,7 +48,7 @@ describe('useResponsive()', () => {
         window.resizeTo(375, 812);
 
         render(
-            <ResponsiveProvider>
+            <ResponsiveProvider {...mockProps}>
                 <MockComponent>{mockRenderProp}</MockComponent>
             </ResponsiveProvider>
         );
